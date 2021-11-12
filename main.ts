@@ -797,7 +797,7 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     ammobar.value += -8
     if (ammo > 0) {
         if (character.matchesRule(player1, character.rule(Predicate.NotMoving, Predicate.FacingLeft))) {
-            character.runFrames(
+            animation.runImageAnimation(
             player1,
             [img`
                 .........................
@@ -956,7 +956,7 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
                 .......cccc......cccc....
                 `],
             100,
-            character.rule(Predicate.NotMoving, Predicate.FacingLeft)
+            false
             )
             shell = sprites.createProjectileFromSprite(img`
                 . . . . . . . . . . . . . . . . 
@@ -1014,7 +1014,7 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
                 `, player1, -150, 10)
             shell.setKind(SpriteKind.bullet)
         } else if (character.matchesRule(player1, character.rule(Predicate.NotMoving, Predicate.FacingRight))) {
-            character.runFrames(
+            animation.runImageAnimation(
             player1,
             [img`
                 .........................
@@ -1173,7 +1173,7 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
                 ....cccc......cccc.......
                 `],
             100,
-            character.rule(Predicate.NotMoving, Predicate.FacingRight)
+            false
             )
             shell = sprites.createProjectileFromSprite(img`
                 . . . . . . . . . . . . . . . . 
@@ -1231,7 +1231,7 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
                 `, player1, 150, -10)
             shell.setKind(SpriteKind.bullet)
         } else if (character.matchesRule(player1, character.rule(Predicate.MovingRight))) {
-            character.runFrames(
+            animation.runImageAnimation(
             player1,
             [img`
                 .........................
@@ -1390,7 +1390,7 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
                 ....cccc......cccc.......
                 `],
             100,
-            character.rule(Predicate.MovingRight)
+            false
             )
             shell = sprites.createProjectileFromSprite(img`
                 . . . . . . . . . . . . . . . . 
@@ -1448,7 +1448,7 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
                 `, player1, 150, -10)
             shell.setKind(SpriteKind.bullet)
         } else if (character.matchesRule(player1, character.rule(Predicate.MovingLeft))) {
-            character.runFrames(
+            animation.runImageAnimation(
             player1,
             [img`
                 .........................
@@ -1607,7 +1607,7 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
                 .......cccc......cccc....
                 `],
             100,
-            character.rule(Predicate.MovingLeft)
+            false
             )
             shell = sprites.createProjectileFromSprite(img`
                 . . . . . . . . . . . . . . . . 
@@ -1665,7 +1665,7 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
                 `, player1, -150, 10)
             shell.setKind(SpriteKind.bullet)
         } else if (character.matchesRule(player1, character.rule(Predicate.MovingUp, Predicate.FacingRight))) {
-            character.runFrames(
+            animation.runImageAnimation(
             player1,
             [img`
                 .........................
@@ -1824,7 +1824,7 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
                 ....cccc......cccc.......
                 `],
             100,
-            character.rule(Predicate.MovingUp, Predicate.FacingRight)
+            false
             )
             shell = sprites.createProjectileFromSprite(img`
                 . . . . . . . . . . . . . . . . 
@@ -1861,7 +1861,7 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
                 . . . . . . . . . . . . . . . . 
                 . . . . . . . . . . . . . . . . 
                 . . . . . . . . . . . . . . . . 
-                `, player1, -150, 10)
+                `, player1, 150, 10)
             shell = sprites.createProjectileFromSprite(img`
                 . . . . . . . . . . . . . . . . 
                 . . . . . . . . . . . . . . . . 
@@ -1879,10 +1879,10 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
                 . . . . . . . . . . . . . . . . 
                 . . . . . . . . . . . . . . . . 
                 . . . . . . . . . . . . . . . . 
-                `, player1, -150, -10)
+                `, player1, 150, -10)
             shell.setKind(SpriteKind.bullet)
         } else {
-            character.runFrames(
+            animation.runImageAnimation(
             player1,
             [img`
                 .........................
@@ -2041,7 +2041,7 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
                 .......cccc......cccc....
                 `],
             100,
-            character.rule(Predicate.MovingUp, Predicate.FacingLeft)
+            false
             )
             shell = sprites.createProjectileFromSprite(img`
                 . . . . . . . . . . . . . . . . 
@@ -2060,7 +2060,7 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
                 . . . . . . . . . . . . . . . . 
                 . . . . . . . . . . . . . . . . 
                 . . . . . . . . . . . . . . . . 
-                `, player1, 150, 0)
+                `, player1, -150, 0)
             shell = sprites.createProjectileFromSprite(img`
                 . . . . . . . . . . . . . . . . 
                 . . . . . . . . . . . . . . . . 
@@ -2110,7 +2110,7 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     }
 })
 function rocket_bar () {
-    ammo = 5
+    mag = 5
     rocketbar = statusbars.create(40, 4, StatusBarKind.power)
     rocketbar.value = 100
     rocketbar.setStatusBarFlag(StatusBarFlag.SmoothTransition, true)
@@ -2118,7 +2118,7 @@ function rocket_bar () {
     rocketbar.setColor(9, 12, 6)
     rocketbar.positionDirection(CollisionDirection.Top)
     rocketbar.setLabel("RPG")
-    ammo = 100
+    mag = 100
 }
 function spawnbolt () {
 	
@@ -2187,11 +2187,11 @@ statusbars.onZero(StatusBarKind.Health, function (status) {
     })
 })
 controller.player2.onButtonEvent(ControllerButton.Right, ControllerButtonEvent.Pressed, function () {
-    ammo += -50
+    mag += -50
     rocketbar.value += -50
-    if (ammo > -1) {
+    if (mag > 0) {
         if (character.matchesRule(player1, character.rule(Predicate.NotMoving, Predicate.FacingLeft))) {
-            character.runFrames(
+            animation.runImageAnimation(
             player1,
             [img`
                 .........................
@@ -2319,7 +2319,7 @@ controller.player2.onButtonEvent(ControllerButton.Right, ControllerButtonEvent.P
                 .......cccc......cccc....
                 `],
             100,
-            character.rule(Predicate.NotMoving, Predicate.FacingLeft)
+            false
             )
             boomza = sprites.createProjectileFromSprite(img`
                 . . . . . . . . . . . . . . . . 
@@ -2341,7 +2341,7 @@ controller.player2.onButtonEvent(ControllerButton.Right, ControllerButtonEvent.P
                 `, player1, -150, 0)
             boomza.setKind(SpriteKind.boom)
         } else if (character.matchesRule(player1, character.rule(Predicate.NotMoving, Predicate.FacingRight))) {
-            character.runFrames(
+            animation.runImageAnimation(
             player1,
             [img`
                 .........................
@@ -2469,7 +2469,7 @@ controller.player2.onButtonEvent(ControllerButton.Right, ControllerButtonEvent.P
                 ....cccc......cccc.......
                 `],
             100,
-            character.rule(Predicate.NotMoving, Predicate.FacingRight)
+            false
             )
             boomza = sprites.createProjectileFromSprite(img`
                 . . . . . . . . . . . . . . . . 
@@ -2491,7 +2491,7 @@ controller.player2.onButtonEvent(ControllerButton.Right, ControllerButtonEvent.P
                 `, player1, 150, 0)
             boomza.setKind(SpriteKind.boom)
         } else if (character.matchesRule(player1, character.rule(Predicate.MovingRight))) {
-            character.runFrames(
+            animation.runImageAnimation(
             player1,
             [img`
                 .........................
@@ -2619,7 +2619,7 @@ controller.player2.onButtonEvent(ControllerButton.Right, ControllerButtonEvent.P
                 ....cccc......cccc.......
                 `],
             100,
-            character.rule(Predicate.MovingRight)
+            false
             )
             boomza = sprites.createProjectileFromSprite(img`
                 . . . . . . . . . . . . . . . . 
@@ -2641,7 +2641,7 @@ controller.player2.onButtonEvent(ControllerButton.Right, ControllerButtonEvent.P
                 `, player1, 150, 0)
             boomza.setKind(SpriteKind.boom)
         } else if (character.matchesRule(player1, character.rule(Predicate.MovingLeft))) {
-            character.runFrames(
+            animation.runImageAnimation(
             player1,
             [img`
                 .........................
@@ -2769,7 +2769,7 @@ controller.player2.onButtonEvent(ControllerButton.Right, ControllerButtonEvent.P
                 .......cccc......cccc....
                 `],
             100,
-            character.rule(Predicate.MovingLeft)
+            false
             )
             boomza = sprites.createProjectileFromSprite(img`
                 . . . . . . . . . . . . . . . . 
@@ -2791,7 +2791,7 @@ controller.player2.onButtonEvent(ControllerButton.Right, ControllerButtonEvent.P
                 `, player1, -150, 0)
             boomza.setKind(SpriteKind.boom)
         } else if (character.matchesRule(player1, character.rule(Predicate.MovingUp, Predicate.FacingRight))) {
-            character.runFrames(
+            animation.runImageAnimation(
             player1,
             [img`
                 .........................
@@ -2919,7 +2919,7 @@ controller.player2.onButtonEvent(ControllerButton.Right, ControllerButtonEvent.P
                 ....cccc......cccc.......
                 `],
             100,
-            character.rule(Predicate.MovingUp, Predicate.FacingRight)
+            false
             )
             boomza = sprites.createProjectileFromSprite(img`
                 . . . . . . . . . . . . . . . . 
@@ -2941,7 +2941,7 @@ controller.player2.onButtonEvent(ControllerButton.Right, ControllerButtonEvent.P
                 `, player1, 150, 0)
             boomza.setKind(SpriteKind.boom)
         } else {
-            character.runFrames(
+            animation.runImageAnimation(
             player1,
             [img`
                 .........................
@@ -3069,7 +3069,7 @@ controller.player2.onButtonEvent(ControllerButton.Right, ControllerButtonEvent.P
                 .......cccc......cccc....
                 `],
             100,
-            character.rule(Predicate.MovingUp, Predicate.FacingLeft)
+            false
             )
             boomza = sprites.createProjectileFromSprite(img`
                 . . . . . . . . . . . . . . . . 
@@ -3101,7 +3101,6 @@ function spawnmboss5 () {
 }
 statusbars.onZero(StatusBarKind.power, function (status) {
     player1.sayText("Rockets out!", 1000, false)
-    rocketbar.value = 0
 })
 function spawngooper () {
 	
@@ -3168,6 +3167,7 @@ function spawndrone () {
 let boomza: Sprite = null
 let level = 0
 let rocketbar: StatusBarSprite = null
+let mag = 0
 let shell: Sprite = null
 let ammobar: StatusBarSprite = null
 let ammo = 0
